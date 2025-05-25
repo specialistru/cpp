@@ -7,7 +7,8 @@
 
 # Дополнительные материалы
 - IDE Dev-C++ Files​ 5.11​ https://sourceforge.net/projects/orwelldevcpp/files/latest/download
+- GCC 15.1 https://github.com/skeeto/w64devkit/releases
 - Справочник по языку С++​ ​ https://en.cppreference.com/w/
-- Стандарт​ https://gcc.gnu.org/projects/cxx-status.html
+- Стандарты C и стандарты C++​ https://gcc.gnu.org/projects/cxx-status.html
 - GCC Releases​ https://gcc.gnu.org/releases.html
 - Build status for GCC​ https://gcc.gnu.org/buildstat.html
