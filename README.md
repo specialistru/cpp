@@ -27,3 +27,16 @@ foreach ($file in $files) {
 }
 
 ```
+
+Перевод из UTF-8 → ISO-8859-1 (Latin-1)
+
+```bash
+
+$files = Get-ChildItem -Include *.h, *.cpp -Recurse -File
+
+foreach ($file in $files) {
+    $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
+    [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::GetEncoding("ISO-8859-1"))
+}
+
+```
