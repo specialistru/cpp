@@ -1,6 +1,7 @@
-#include <iostream>
 #include "Message.h"
 #include "Date.h"
+
+#include <iostream>
 
 void Date::Set(int d, int m, int y) {
     if (y < 1) {
