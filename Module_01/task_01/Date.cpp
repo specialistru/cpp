@@ -39,13 +39,9 @@ void Date::Set(int d, int m, int y) {
 }
 
 void Date::Print() const {
-    if (day < 10) std::cout << '0';
-    std::cout << day << '/';
-
-    if (month < 10) std::cout << '0';
-    std::cout << month << '/';
-
-    std::cout << year << "\n";
+    std::cout << (day < 10 ? "0" : "") << day << "/"
+              << (month < 10 ? "0" : "") << month << "/"
+              << year << "\n";
 }
 
 void Date::Read() {
