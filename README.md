@@ -13,6 +13,7 @@
 - GCC Releases​ https://gcc.gnu.org/releases.html
 - Build status for GCC​ https://gcc.gnu.org/buildstat.html
 
+# Вспомогательные материалы
 
 PowerShell-скрипт, который перекодирует все .h и .cpp файлы в UTF-8
 
