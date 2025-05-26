@@ -28,15 +28,15 @@ foreach ($file in $files) {
 
 ```
 
-Перевод из UTF-8 → ISO-8859-1 (Latin-1)
+Перевод из UTF-8 → Windows-1251
 
 ```bash
 
-$files = Get-ChildItem -Include *.h, *.cpp -Recurse -File;
+$files = Get-ChildItem -Include *.h, *.cpp -Recurse -File
 
 foreach ($file in $files) {
-    $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8);
-    [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::GetEncoding("ISO-8859-1"))
+    $content = Get-Content -Raw -Encoding UTF8 -Path $file.FullName
+    [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::GetEncoding("windows-1251"))
 }
 
 ```
