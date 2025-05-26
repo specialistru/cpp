@@ -4,33 +4,25 @@
 #include <iostream>
 
 void Date::Set(int d, int m, int y) {
-    if (y < 1) {
-        Error("Год должен быть положительным.\n");
-        return;
-    }
-    if (m < 1 || m > 12) {
-        Error("Месяц должен быть от 1 до 12.\n");
-        return;
-    }
-    if (d < 1 || d > 31) {
-        Error("День должен быть от 1 до 31.\n");
-        return;
-    }
-
-    if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) {
-        Error("В этом месяце только 30 дней.\n");
+    static constexpr int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    if ((unsigned)(y) < 1 || (unsigned)(m - 1) >= 12 || (unsigned)(d - 1) >= 31) {
+        Error("Некорректная дата: год > 0, месяц 1-12, день 1-31.\n");
         return;
     }
 
     if (m == 2) {
-        bool leap = (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
-        if (leap && d > 29) {
-            Error("Февраль в високосный год имеет 29 дней.\n");
-            return;
-        } else if (!leap && d > 28) {
-            Error("Февраль имеет 28 дней.\n");
+        bool isLeap = (y % 4 == 0) && (y % 100 != 0 || y % 400 == 0);
+        int maxDays = isLeap ? 29 : 28;
+        if (d > maxDays) {
+            Error(isLeap ? "Февраль в високосный год имеет 29 дней.\n" : "Февраль имеет 28 дней.\n");
             return;
         }
+    }
+
+    else if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) {
+        Error("В этом месяце только 30 дней.\n");
+        return;
     }
 
     day = d;
