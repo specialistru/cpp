@@ -12,3 +12,10 @@
 - Стандарты C и стандарты C++​ https://gcc.gnu.org/projects/cxx-status.html
 - GCC Releases​ https://gcc.gnu.org/releases.html
 - Build status for GCC​ https://gcc.gnu.org/buildstat.html
+
+
+PowerShell-скрипт, который перекодирует все .h и .cpp файлы в UTF-8
+
+```bash
+  Get-ChildItem -Filter *.txt | ForEach-Object {$content = Get-Content $_.FullName -Encoding Default Set-Content $_.FullName -Value $content -Encoding UTF8}
+```  
