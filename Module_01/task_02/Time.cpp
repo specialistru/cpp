@@ -4,45 +4,55 @@
 #include <iostream>
 
 void Time::Set(int h, int m, int s) {
-    if (h < 0 || h > 23) {
-        Error("часы должны быть от 0 до 23");
-        return;
-    }
-    if (m < 0 || m > 59) {
-        Error("минуты должны быть от 0 до 59");
-        return;
-    }
-    if (s < 0 || s > 59) {
-        Error("секунды должны быть от 0 до 59");
-        return;
-    }
-
     hours = h;
     minutes = m;
     seconds = s;
+
+    if ((unsigned)h > 23 | (unsigned)m > 59 | (unsigned)s > 59) {
+        hours = -1;
+        Error("Некорректное время: часы [0-23], минуты [0-59], секунды [0-59]\n");
+    }
 }
 
 void Time::Print() const {
-    if (hours < 10) std::cout << '0';
-    std::cout << hours << ':';
-
-    if (minutes < 10) std::cout << '0';
-    std::cout << minutes << ':';
-
-    if (seconds < 10) std::cout << '0';
-    std::cout << seconds << "\n";
+    std::cout << (hours < 10 ? "0" : "") << hours << ":"
+              << (minutes < 10 ? "0" : "") << minutes << ":"
+              << (seconds < 10 ? "0" : "") << seconds << "\n";
 }
 
-
 void Time::Read() {
-    int h, m, s;
-    Message("Введите время (час, минуты [секунды]): ");
-    std::cin >> h >> m;
-    // Чтение секунд, если они указаны
-    if (std::cin.peek() != '\n') {
-        std::cin >> s;
+    int h, m, s = 0;
+    bool valid = false;
+    
+    while (!valid) {
+        Message("Введите время (час, минуты [секунды]): ");
+        std::cin >> h >> m;
+        if (std::cin.peek() != '\n') {
+            std::cin >> s;
+        }
+        while (std::cin.get() != '\n') continue;
         Set(h, m, s);
-    } else {
-        Set(h, m); // Установка времени без секунд
+        valid = (hours != -1);
+        
+        if (!valid) {
+            Message("\n");
+        }
     }
+}
+
+// Сравнение времени
+bool Time::Equal(const Time& other) const {
+    return hours == other.hours && minutes == other.minutes && seconds == other.seconds;
+}
+
+bool Time::Less(const Time& other) const {
+    if (hours != other.hours) return hours < other.hours;
+    if (minutes != other.minutes) return minutes < other.minutes;
+    return seconds < other.seconds;
+}
+
+bool Time::Greater(const Time& other) const {
+    if (hours != other.hours) return hours > other.hours;
+    if (minutes != other.minutes) return minutes > other.minutes;
+    return seconds > other.seconds;
 }

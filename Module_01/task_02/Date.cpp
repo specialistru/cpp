@@ -4,33 +4,24 @@
 #include <iostream>
 
 void Date::Set(int d, int m, int y) {
-    if (y < 1) {
-        Error("√од должен быть положительным.\n");
-        return;
-    }
-    if (m < 1 || m > 12) {
-        Error("ћес€ц должен быть от 1 до 12.\n");
-        return;
-    }
-    if (d < 1 || d > 31) {
-        Error("ƒень должен быть от 1 до 31.\n");
-        return;
-    }
-
-    if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) {
-        Error("¬ этом мес€це только 30 дней.\n");
+    static constexpr int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    if ((unsigned)(y) < 1 || (unsigned)(m - 1) >= 12 || (unsigned)(d - 1) >= 31) {
+        Error("Ќекорректна€ дата: год > 0, мес€ц 1-12, день 1-31.\n");
         return;
     }
 
     if (m == 2) {
-        bool leap = (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
-        if (leap && d > 29) {
-            Error("‘евраль в високосный год имеет 29 дней.\n");
-            return;
-        } else if (!leap && d > 28) {
-            Error("‘евраль имеет 28 дней.\n");
+        bool isLeap = (y % 4 == 0) && (y % 100 != 0 || y % 400 == 0);
+        int maxDays = isLeap ? 29 : 28;
+        if (d > maxDays) {
+            Error(isLeap ? "‘евраль в високосный год имеет 29 дней.\n" : "‘евраль имеет 28 дней.\n");
             return;
         }
+    }
+    else if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) {
+        Error("¬ этом мес€це только 30 дней.\n");
+        return;
     }
 
     day = d;
@@ -39,18 +30,42 @@ void Date::Set(int d, int m, int y) {
 }
 
 void Date::Print() const {
-    if (day < 10) std::cout << '0';
-    std::cout << day << '/';
-
-    if (month < 10) std::cout << '0';
-    std::cout << month << '/';
-
-    std::cout << year << "\n";
+    std::cout << (day < 10 ? "0" : "") << day << "/"
+              << (month < 10 ? "0" : "") << month << "/"
+              << year << "\n";
 }
 
 void Date::Read() {
     int d, m, y;
-    Message("¬ведите дату (день мес€ц год): ");
-    std::cin >> d >> m >> y;
-    Set(d, m, y);
+    bool valid = false;
+    
+    while (!valid) {
+        Message("¬ведите дату (день мес€ц год): ");
+        std::cin >> d >> m >> y;
+        while (std::cin.get() != '\n') continue;
+        int old_day = day, old_month = month, old_year = year;
+        Set(d, m, y);
+        valid = (day != old_day || month != old_month || year != old_year);
+        
+        if (!valid) {
+            Message("\n");
+        }
+    }
+}
+
+// —равнение дат
+bool Date::Equal(const Date& other) const {
+    return day == other.day && month == other.month && year == other.year;
+}
+
+bool Date::Less(const Date& other) const {
+    if (year != other.year) return year < other.year;
+    if (month != other.month) return month < other.month;
+    return day < other.day;
+}
+
+bool Date::Greater(const Date& other) const {
+    if (year != other.year) return year > other.year;
+    if (month != other.month) return month > other.month;
+    return day > other.day;
 }
