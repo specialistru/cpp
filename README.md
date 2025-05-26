@@ -32,10 +32,10 @@ foreach ($file in $files) {
 
 ```bash
 
-$files = Get-ChildItem -Include *.h, *.cpp -Recurse -File
+$files = Get-ChildItem -Include *.h, *.cpp -Recurse -File;
 
 foreach ($file in $files) {
-    $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8)
+    $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::UTF8);
     [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::GetEncoding("ISO-8859-1"))
 }
 
