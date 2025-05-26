@@ -1,4 +1,4 @@
-﻿#ifndef _TIME_H_
+#ifndef _TIME_H_
 #define _TIME_H_
 
 class Time

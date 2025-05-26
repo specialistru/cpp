@@ -1,9 +1,9 @@
-ï»¿#include "Message.h"
+#include "Message.h"
 
 #include <iostream>
 
 void Error(const char* msg) {
-    std::cout << "ÃŽÃ¸Ã¨Ã¡ÃªÃ : " << msg;
+    std::cout << "Îøèáêà: " << msg;
 }
 
 void Message(const char* msg) {
