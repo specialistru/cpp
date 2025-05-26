@@ -1,6 +1,7 @@
-#include <iostream>
 #include "Message.h"
 #include "Time.h"
+
+#include <iostream>
 
 void Time::Set(int h, int m, int s) {
     if (h < 0 || h > 23) {
