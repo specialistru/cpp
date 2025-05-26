@@ -3,9 +3,9 @@
 #include <iostream>
 
 void Error(const char* msg) {
-    std::cout << "Ошибка: " << msg << "\n";    
+    std::cout << "Ошибка: " << msg;
 }
 
 void Message(const char* msg) {
-    std::cout << msg << "\n";    
+    std::cout << msg;
 }
