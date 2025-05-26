@@ -4,35 +4,21 @@
 #include <iostream>
 
 void Time::Set(int h, int m, int s) {
-    if (h < 0 || h > 23) {
-        Error("часы должны быть от 0 до 23\n");
-        return;
-    }
-    if (m < 0 || m > 59) {
-        Error("минуты должны быть от 0 до 59\n");
-        return;
-    }
-    if (s < 0 || s > 59) {
-        Error("секунды должны быть от 0 до 59\n");
-        return;
-    }
-
     hours = h;
     minutes = m;
     seconds = s;
+
+    if ((unsigned)h > 23 | (unsigned)m > 59 | (unsigned)s > 59) {
+        hours = -1;
+        Error("Некорректное время: часы [0-23], минуты [0-59], секунды [0-59]\n");
+    }
 }
 
 void Time::Print() const {
-    if (hours < 10) std::cout << '0';
-    std::cout << hours << ':';
-
-    if (minutes < 10) std::cout << '0';
-    std::cout << minutes << ':';
-
-    if (seconds < 10) std::cout << '0';
-    std::cout << seconds << "\n";
+    std::cout << (hours < 10 ? "0" : "") << hours << ":"
+              << (minutes < 10 ? "0" : "") << minutes << ":"
+              << (seconds < 10 ? "0" : "") << seconds << "\n";
 }
-
 
 void Time::Read() {
     int h, m, s;
