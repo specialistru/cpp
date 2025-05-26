@@ -18,9 +18,6 @@ PowerShell-скрипт, который перекодирует все .h и .c
 
 ```bash
 
-Get-ChildItem -Include *.h, *.cpp -Recurse | ForEach-Object {
-    $content = Get-Content $_.FullName -Encoding Default
-    Set-Content $_.FullName -Value $content -Encoding UTF8
-}
+$files = Get-ChildItem -Include *.h, *.cpp -Recurse -File; foreach ($file in $files) { $content = [System.IO.File]::ReadAllText($file.FullName, [System.Text.Encoding]::GetEncoding("ISO-8859-1")); [System.IO.File]::WriteAllText($file.FullName, $content, [System.Text.Encoding]::UTF8) }
 
 ```
