@@ -1,8 +1,7 @@
 #ifndef _TIME_H_
 #define _TIME_H_
 
-class Time
-{
+class Time {
     int hours;
     int minutes;
     int seconds;
