@@ -1,8 +1,7 @@
 #ifndef _DATE_H_
 #define _DATE_H_
 
-class Date
-{
+class Date {
     int day;
     int month;
     int year;
