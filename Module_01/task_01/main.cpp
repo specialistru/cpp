@@ -1,7 +1,8 @@
-#include <iostream>
 #include "Message.h"
 #include "Date.h"
 #include "Time.h"
+
+#include <iostream>
 
 class Date;
 class Time;
