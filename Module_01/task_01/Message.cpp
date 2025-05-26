@@ -3,7 +3,7 @@
 #include <iostream>
 
 void Error(const char* msg) {
-    std::cout << "ÐžÑˆÐ¸Ð±ÐºÐ°: " << msg;
+    std::cout << "Îøèáêà: " << msg;
 }
 
 void Message(const char* msg) {

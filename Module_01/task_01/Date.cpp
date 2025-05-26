@@ -7,7 +7,7 @@ void Date::Set(int d, int m, int y) {
     static constexpr int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     
     if ((unsigned)(y) < 1 || (unsigned)(m - 1) >= 12 || (unsigned)(d - 1) >= 31) {
-        Error("РќРµРєРѕСЂСЂРµРєС‚РЅР°СЏ РґР°С‚Р°: РіРѕРґ > 0, РјРµСЃСЏС† 1-12, РґРµРЅСЊ 1-31.\n");
+        Error("Некорректная дата: год > 0, месяц 1-12, день 1-31.\n");
         return;
     }
 
@@ -15,13 +15,12 @@ void Date::Set(int d, int m, int y) {
         bool isLeap = (y % 4 == 0) && (y % 100 != 0 || y % 400 == 0);
         int maxDays = isLeap ? 29 : 28;
         if (d > maxDays) {
-            Error(isLeap ? "Р¤РµРІСЂР°Р»СЊ РІ РІРёСЃРѕРєРѕСЃРЅС‹Р№ РіРѕРґ РёРјРµРµС‚ 29 РґРЅРµР№.\n" : "Р¤РµРІСЂР°Р»СЊ РёРјРµРµС‚ 28 РґРЅРµР№.\n");
+            Error(isLeap ? "Февраль в високосный год имеет 29 дней.\n" : "Февраль имеет 28 дней.\n");
             return;
         }
     }
-
     else if ((m == 4 || m == 6 || m == 9 || m == 11) && d > 30) {
-        Error("Р’ СЌС‚РѕРј РјРµСЃСЏС†Рµ С‚РѕР»СЊРєРѕ 30 РґРЅРµР№.\n");
+        Error("В этом месяце только 30 дней.\n");
         return;
     }
 
@@ -38,7 +37,21 @@ void Date::Print() const {
 
 void Date::Read() {
     int d, m, y;
-    Message("Р’РІРµРґРёС‚Рµ РґР°С‚Сѓ (РґРµРЅСЊ РјРµСЃСЏС† РіРѕРґ): ");
-    std::cin >> d >> m >> y;
-    Set(d, m, y);
+    bool valid = false;
+    
+    while (!valid) {
+        Message("Введите дату (день месяц год): ");
+        std::cin >> d >> m >> y;
+        
+        // Очистка буфера ввода альтернативным способом
+        while (std::cin.get() != '\n') continue;
+        
+        int old_day = day, old_month = month, old_year = year;
+        Set(d, m, y);
+        valid = (day != old_day || month != old_month || year != old_year);
+        
+        if (!valid) {
+            Message("\n");
+        }
+    }
 }

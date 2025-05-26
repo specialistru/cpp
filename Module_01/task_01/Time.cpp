@@ -10,7 +10,7 @@ void Time::Set(int h, int m, int s) {
 
     if ((unsigned)h > 23 | (unsigned)m > 59 | (unsigned)s > 59) {
         hours = -1;
-        Error("РќРµРєРѕСЂСЂРµРєС‚РЅРѕРµ РІСЂРµРјСЏ: С‡Р°СЃС‹ [0-23], РјРёРЅСѓС‚С‹ [0-59], СЃРµРєСѓРЅРґС‹ [0-59]\n");
+        Error("Некорректное время: часы [0-23], минуты [0-59], секунды [0-59]\n");
     }
 }
 
@@ -21,14 +21,24 @@ void Time::Print() const {
 }
 
 void Time::Read() {
-    int h, m, s;
-    Message("Р’РІРµРґРёС‚Рµ РІСЂРµРјСЏ (С‡Р°СЃ, РјРёРЅСѓС‚С‹ [СЃРµРєСѓРЅРґС‹]): ");
-    std::cin >> h >> m;
-    // Р§С‚РµРЅРёРµ СЃРµРєСѓРЅРґ, РµСЃР»Рё РѕРЅРё СѓРєР°Р·Р°РЅС‹
-    if (std::cin.peek() != '\n') {
-        std::cin >> s;
+    int h, m, s = 0;
+    bool valid = false;
+    
+    while (!valid) {
+        Message("Введите время (час, минуты [секунды]): ");
+        std::cin >> h >> m;
+        if (std::cin.peek() != '\n') {
+            std::cin >> s;
+        }
+        
+        // Очистка буфера ввода альтернативным способом
+        while (std::cin.get() != '\n') continue;
+        
         Set(h, m, s);
-    } else {
-        Set(h, m); // РЈСЃС‚Р°РЅРѕРІРєР° РІСЂРµРјРµРЅРё Р±РµР· СЃРµРєСѓРЅРґ
+        valid = (hours != -1);
+        
+        if (!valid) {
+            Message("\n");
+        }
     }
 }
