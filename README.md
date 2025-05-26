@@ -17,5 +17,10 @@
 PowerShell-скрипт, который перекодирует все .h и .cpp файлы в UTF-8
 
 ```bash
-  Get-ChildItem -Filter *.txt | ForEach-Object {$content = Get-Content $_.FullName -Encoding Default Set-Content $_.FullName -Value $content -Encoding UTF8}
-```  
+
+Get-ChildItem -Filter *.txt | ForEach-Object {
+    $content = Get-Content $_.FullName -Encoding Default
+    Set-Content $_.FullName -Value $content -Encoding UTF8
+}
+
+```
