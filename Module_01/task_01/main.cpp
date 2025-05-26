@@ -8,7 +8,7 @@ class Time;
 
 int main(int argc, char** argv)
 {
-	system("chcp 1251 > nul");
+    system("chcp 1251 > nul");
     Message("Лабораторная работа по курсу программирования на C++. Задача 1.1. \n\n");
 
     Date date;
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     time.Read();
     Message("Введенное время: ");
     
-	date.Print();
+    date.Print();
     time.Print();
 
     return 0;
