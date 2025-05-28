@@ -252,8 +252,9 @@ entry = proc_create("my_entry", mode, parent, &proc_fops);
 
 Здесь `proc_create()` создает запись в виртуальной файловой системе `/proc`, предоставляя интерфейс для взаимодействия с процессами. ([thelinuxcode.com][2])
 
-[1]: https://www.chiark.greenend.org.uk/doc/linux-doc/html/driver-api/driver-model/design-patterns.html?utm_source=chatgpt.com "Device Driver Design Patterns — The Linux Kernel documentation"
-[2]: https://thelinuxcode.com/design-patterns-cpp/?utm_source=chatgpt.com "Demystifying Design Patterns: A Guide for Linux Developers – TheLinuxCode"
-[3]: https://arunk2.medium.com/design-patterns-in-os-kernel-d3f7e2f3f3bf?utm_source=chatgpt.com "Design Patterns in OS Kernel. Most of us know about design patterns… | by Arunkumar Krishnan | Medium"
-[4]: https://lwn.net/Articles/444910/?utm_source=chatgpt.com "Object-oriented design patterns in the kernel, part 1 [LWN.net]"
+https://www.chiark.greenend.org.uk/doc/linux-doc/html/driver-api/driver-model/design-patterns.html?utm_source=chatgpt.com "Device Driver Design Patterns — The Linux Kernel documentation"
+https://thelinuxcode.com/design-patterns-cpp/?utm_source=chatgpt.com "Demystifying Design Patterns: A Guide for Linux Developers – TheLinuxCode"
+https://arunk2.medium.com/design-patterns-in-os-kernel-d3f7e2f3f3bf?utm_source=chatgpt.com "Design Patterns in OS Kernel. Most of us know about design patterns… | by Arunkumar Krishnan | Medium"
+https://lwn.net/Articles/444910/?utm_source=chatgpt.com "Object-oriented design patterns in the kernel, part 1 [LWN.net]"
+
 
